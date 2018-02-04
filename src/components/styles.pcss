@@ -1,0 +1,107 @@
+.form {
+    background-color: #fff;
+    border-radius: 10px;
+    width: 400px;
+    margin: auto;
+    padding: 15px;
+    font-family: Helvetica, Arial, sans-serif;
+
+    & p {
+        margin: 0;
+    }
+
+    & label {
+        text-transform: uppercase;
+        font-size: 12px;
+        opacity: 0.5;
+        margin-bottom: 7px;
+    }
+
+    & header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 24px;
+
+        & p {
+            text-align: center;
+        }
+    }
+}
+
+.firstForm {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+
+    & .firstName, & .lastName {
+        flex: 1 1 0;    
+        display: flex;
+        flex-direction: column;
+    }
+
+    & .firstName {
+        margin-right: 10px;
+    }
+
+    & input {
+        padding: 8px 12px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+}
+
+.occupation {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+.phone {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 32px;
+    position: relative;
+    
+    & .phoneInput {
+        display: flex;
+    }
+
+    & .inputNumbers {
+        flex: 1 1 0;
+        padding: 8px 12px 8px 34px;
+        border-radius: 0 5px 5px 0;
+        border: 1px solid #ccc;
+        border-left: none;
+    }
+
+    & .flag {
+        flex: 0 0 85px;
+    }
+
+    & .prefix {
+        position: absolute;
+        top: 30px;
+        left: 95px;
+        font-size: 14px;
+    }
+
+    & :global(.Select-control) {
+        border-radius: 5px 0 0 5px;
+    }
+}
+
+.submitBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+
+    & input {
+        color: #fff;
+        padding: 7px 12px;
+        border-radius: 6px;
+        background-color: rgb(95, 157, 228);
+        border: none;
+    }
+}
