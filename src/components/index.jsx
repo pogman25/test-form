@@ -13,6 +13,12 @@ export default class FormInput extends Component {
             phoneNumber: '',
             country: this.props.countries[0],
             occupation: null
+        },
+        errors: {
+            firstName: false,
+            lastName: false,
+            phoneNumber: false,
+            occupation: false
         }
     }
 
@@ -47,15 +53,42 @@ export default class FormInput extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const {data} = this.state;
-        this.props.postData(data)
+        const {data: {
+            firstName, lastName, phoneNumber, country, occupation
+        }, errors} = this.state;
+        if(!firstName.trim() || !lastName.trim() || phoneNumber.length < 10 || !occupation) {
+            this.setState({
+                errors: {
+                    firstName: !firstName.trim(),
+                    lastName: !lastName.trim(),
+                    phoneNumber: phoneNumber.length < 10,
+                    occupation: !occupation
+                }
+            })
+        } else {
+            this.props.postData({
+                firstName,
+                lastName,
+                occupation:occupation.value,
+                phoneNumber: `${country.prefix}${phoneNumber}`
+            });
+            this.setState({
+                errors: {
+                    firstName: false,
+                    lastName: false,
+                    phoneNumber: false,
+                    occupation: false
+                }
+            })
+        }
     }
 
     render() {
         const {occupations, countries} = this.props;
         const {data: {
             occupation, firstName, lastName, phoneNumber, country
-        }} = this.state;
+            }, errors
+        } = this.state;
         return (
             <div className={styles.form}>
                 <header>
@@ -67,6 +100,7 @@ export default class FormInput extends Component {
                     <div className={styles.firstForm}>
                         <div className={styles.firstName}>
                             <label htmlFor="">Имя</label>
+                            {errors.firstName && <p className={styles.errors}>Обязательно</p>}
                             <input
                                 type="text"
                                 name="firstName"
@@ -76,6 +110,7 @@ export default class FormInput extends Component {
                         </div>
                         <div className={styles.lastName}>
                             <label htmlFor="">Фамилия</label>
+                            {errors.lastName && <p className={styles.errors}>Обязательно</p>}
                             <input
                                 type="text"
                                 name="lastName"
@@ -86,6 +121,7 @@ export default class FormInput extends Component {
                     </div>
                     <div className={styles.occupation}>
                         <label htmlFor="">Профессия</label>
+                        {errors.occupation && <p className={styles.errors}>Обязательно</p>}
                         <Select
                             name="occupation"
                             onChange={(e) =>this.hadleSelect(e, "occupation")}
@@ -97,6 +133,7 @@ export default class FormInput extends Component {
                     </div>
                     <div className={styles.phone}>
                         <label>Телефон</label>
+                        {errors.phoneNumber && <p className={styles.errors}>Обязательно</p>}
                         <div className={styles.phoneInput}>
                             <div className={styles.flag}>
                                 <Select

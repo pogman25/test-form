@@ -38,6 +38,7 @@
         flex: 1 1 0;    
         display: flex;
         flex-direction: column;
+        position: relative;
     }
 
     & .firstName {
@@ -55,6 +56,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 16px;
+    position: relative;
 }
 
 .phone {
@@ -96,6 +98,7 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 16px;
+    cursor: pointer;
 
     & input {
         color: #fff;
@@ -104,4 +107,11 @@
         background-color: rgb(95, 157, 228);
         border: none;
     }
+}
+
+.errors {
+    position: absolute;
+    color: red;
+    right: 0;
+    font-size: 12px;
 }
